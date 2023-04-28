@@ -36,6 +36,14 @@ export class AttendanceComponent implements OnInit {
     });
   }
 
+  updateAttendance(id: string, value: any, name: string) {
+    const updatedCalValue = {
+      name: name,
+      attendanceCal: value,
+    }
+    this.attendanceService.updateAttendance(id, updatedCalValue);
+  }
+
   onSubmit() {
     if (this.attendanceForm?.invalid) {
       return;
@@ -43,8 +51,9 @@ export class AttendanceComponent implements OnInit {
 
     const newAttendance = {
       name: this.attendanceForm?.controls?.['name'].value,
-      present: this.attendanceForm?.controls['present'].value,
-      absent: this.attendanceForm?.controls['absent'].value
+      // present: this.attendanceForm?.controls['present'].value,
+      // absent: this.attendanceForm?.controls['absent'].value
+      attendanceCal: []
     };
 
     this.attendanceService.addAttendance(newAttendance);
