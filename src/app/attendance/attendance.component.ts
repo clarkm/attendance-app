@@ -14,6 +14,9 @@ export class AttendanceComponent implements OnInit {
   attendance: any[] | undefined;
 
   selected: Date | null | undefined;
+  
+  public modelCalendar: Date[] | undefined;
+
 
   constructor(
     private attendanceService: AttendanceService,

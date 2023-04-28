@@ -1,11 +1,19 @@
 <div class="container mt-4">
-
-      <mat-card class="demo-inline-calendar-card">
-        <mat-calendar
-         [(selected)]="selected"
-         ></mat-calendar>
+    <mat-card style="width:300px">
+        <mat-card-header>
+          <mat-card-title>dynamic name here</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field style="display:none">
+            <ngx-multiple-dates [matDatepicker]="pickerCalendar" placeholder="Calendar"
+                                name="modelCalendar" [(ngModel)]="modelCalendar">
+            </ngx-multiple-dates>
+          </mat-form-field>
+          <mat-calendar #pickerCalendar></mat-calendar>
+          <!-- make this modelCalendar obj per user and put on firebase:
+             <pre>{{ modelCalendar | json }}</pre> -->
+        </mat-card-content>
       </mat-card>
-      <p>Selected date: {{selected}}</p>
 
     <div class="row">
       <div class="col-md-8">

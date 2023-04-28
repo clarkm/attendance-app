@@ -11,10 +11,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import {MatCardModule} from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgModule } from '@angular/core';
+import { NgxMultipleDatesModule } from 'ngx-multiple-dates'; // module import
 
 @NgModule({
   declarations: [
@@ -30,8 +33,10 @@ import { NgModule } from '@angular/core';
    MatInputModule, 
    MatNativeDateModule,
    MatCardModule,
-   
+   MatChipsModule,
    HttpClientModule,
+   MatIconModule,
+   NgxMultipleDatesModule
   ],
   providers: [
     AttendanceService,
