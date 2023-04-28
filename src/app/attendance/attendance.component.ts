@@ -13,6 +13,8 @@ export class AttendanceComponent implements OnInit {
   attendanceForm: FormGroup;
   attendance: any[] | undefined;
 
+  selected: Date | null | undefined;
+
   constructor(
     private attendanceService: AttendanceService,
     private formBuilder: FormBuilder

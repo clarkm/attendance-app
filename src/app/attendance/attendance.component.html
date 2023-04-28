@@ -1,4 +1,12 @@
 <div class="container mt-4">
+
+      <mat-card class="demo-inline-calendar-card">
+        <mat-calendar
+         [(selected)]="selected"
+         ></mat-calendar>
+      </mat-card>
+      <p>Selected date: {{selected}}</p>
+
     <div class="row">
       <div class="col-md-8">
         <form [formGroup]="attendanceForm" (ngSubmit)="onSubmit()">
@@ -31,9 +39,9 @@
           </thead>
           <tbody>
             <tr *ngFor="let att of attendance | keyvalue">
-                <td>Name: {{ att.value.name }} </td>
-                <td>Present: {{ att.value.present }} </td>
-                <td>Absent: {{ att.value.absent }}</td>
+                <td>{{ att.value.name }} </td>
+                <td>{{ att.value.present }} </td>
+                <td>{{ att.value.absent }}</td>
               <td><button class="btn btn-danger" (click)="deleteAttendance(att.key)">Delete</button></td>
             </tr>
           </tbody>
