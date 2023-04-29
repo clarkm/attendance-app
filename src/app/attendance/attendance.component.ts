@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { map, tap } from 'rxjs';
 
 import { AttendanceService } from '../attendance.service';
 
@@ -31,7 +32,23 @@ export class AttendanceComponent implements OnInit {
 
   ngOnInit() {
 
-    this.attendanceService.getAttendance().subscribe((data: any[]) => {
+    this.attendanceService.getAttendance().pipe(
+      map(data => {
+        for (const key in data) {
+          if (Object.prototype.hasOwnProperty.call(data, key)) {
+            const element = data[key];
+            console.log('element: ', element);
+            if (element.attendanceCal) {
+              element.attendanceCal = element.attendanceCal.map((dateString: string) => new Date(dateString));
+            }
+          }
+        }
+        return data;
+      }),
+      tap(res => {
+        console.log('res: ', res);
+      })
+    ).subscribe((data: any[]) => {
       this.attendance = data;
     });
   }
