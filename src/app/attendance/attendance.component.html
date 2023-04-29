@@ -33,21 +33,35 @@
             <tr *ngFor="let att of attendance | keyvalue">
                 <td>
                     
-                <mat-card style="width:300px">
+                <!-- <mat-card style="width:300px">
                     <mat-card-header>
                     <mat-card-title>{{ att.value.name }} </mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
-                    <mat-form-field style="display:none">
+                    <mat-form-field style="">
                         <ngx-multiple-dates [matDatepicker]="pickerCalendar" placeholder="Calendar"
                                             name="modelCalendar" [(ngModel)]="att.value.attendanceCal">
                         </ngx-multiple-dates>
                     </mat-form-field>
-                    <mat-calendar #pickerCalendar (click)="updateAttendance(att.key, att.value.attendanceCal, att.value.name)"></mat-calendar>
-                    <!-- make this modelCalendar obj per user and put on firebase: -->
+                    <mat-calendar #pickerCalendar (click)="updateAttendance(att.key, att, att.value.name)"></mat-calendar>
+                    <-- make this modelCalendar obj per user and put on firebase: --
                         <pre>{{ att.value.attendanceCal | json }}</pre>
                     </mat-card-content>
-                </mat-card>
+                </mat-card> -->
+                <mat-card>
+                    <!-- <mat-card-header>
+                      <mat-card-title>{{ att.value.name }} </mat-card-title>
+                    </mat-card-header> -->
+                    <mat-card-content>
+                      <mat-form-field class="full-width">
+                        <ngx-multiple-dates [matDatepicker]="pickerCalendar" [placeholder]="att.value.name" [name]="att.value.name"
+                                            [(ngModel)]="att.value.attendanceCal">
+                        </ngx-multiple-dates>
+                        <mat-datepicker #pickerCalendar></mat-datepicker>
+                      </mat-form-field>
+                      <!-- <pre>{{ model | json }}</pre> -->
+                    </mat-card-content>
+                  </mat-card>
                 
                 </td>
                 <td>{{ att.value.present }} </td>
