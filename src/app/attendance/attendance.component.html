@@ -52,6 +52,7 @@
                 </td>
                 <td>{{ att.value.present }} </td>
                 <td>{{ att.value.absent }}</td>
+              <td><button class="btn btn-danger" (click)="saveAttendanceCal(att.key, att.value.attendanceCal)">save attendanceCal</button></td>
               <td><button class="btn btn-danger" (click)="deleteAttendance(att.key)">Delete</button></td>
             </tr>
           </tbody>

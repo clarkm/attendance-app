@@ -41,7 +41,11 @@ export class AttendanceComponent implements OnInit {
       name: name,
       attendanceCal: value,
     }
-    this.attendanceService.updateAttendance(id, updatedCalValue);
+    // this.attendanceService.updateAttendance(id, updatedCalValue);
+  }
+
+  saveAttendanceCal(key:string,cal:any) {
+    this.attendanceService.saveAttendanceCal(key, this.attendance);
   }
 
   onSubmit() {
