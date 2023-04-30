@@ -3,35 +3,15 @@
       <div class="col-md-8">
         <form [formGroup]="attendanceForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" formControlName="name">
+            <label for="name"></label>
+            <input type="text" placeholder="Enter Name and click enter" class="form-control" id="name" formControlName="name" style="width:300px">
           </div>
-          <div class="form-group">
-            <label for="present">Present</label>
-            <input type="checkbox" class="form-check-input" id="present" formControlName="present">
-          </div>
-          <div class="form-group">
-            <label for="absent">Absent</label>
-            <input type="checkbox" class="form-check-input" id="absent" formControlName="absent">
-          </div>
-          <button type="submit" class="btn btn-primary" [disabled]="attendanceForm.invalid">Submit</button>
         </form>
       </div>
     </div>
     <div class="row mt-4">
-      <div class="col-md-8">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Present</th>
-              <th>Absent</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let att of attendance | keyvalue">
-                <td>
+      <div class="col-md-8" style="overflow: auto;">
+            <div *ngFor="let att of attendance | keyvalue" style="width:200px;float: left;">
                     
                 <!-- <mat-card style="width:300px">
                     <mat-card-header>
@@ -53,24 +33,17 @@
                       <mat-card-title>{{ att.value.name }} </mat-card-title>
                     </mat-card-header> -->
                     <mat-card-content>
-                      <mat-form-field class="full-width">
-                        <ngx-multiple-dates [matDatepicker]="pickerCalendar" [placeholder]="att.value.name" [name]="att.value.name"
-                                            [(ngModel)]="att.value.attendanceCal">
-                        </ngx-multiple-dates>
-                        <mat-datepicker #pickerCalendar></mat-datepicker>
-                      </mat-form-field>
-                      <!-- <pre>{{ model | json }}</pre> -->
-                    </mat-card-content>
+                        <mat-form-field class="full-width">
+                          <ngx-multiple-dates [matDatepicker]="pickerCalendar" [placeholder]="att.value.name" [name]="att.value.name" [(ngModel)]="att.value.attendanceCal">
+                          </ngx-multiple-dates>
+                          <mat-datepicker #pickerCalendar (dateChange)="saveAttendanceCal(att.key)"></mat-datepicker>
+                        </mat-form-field>
+                      </mat-card-content>
                   </mat-card>
                 
-                </td>
-                <td>{{ att.value.present }} </td>
-                <td>{{ att.value.absent }}</td>
-              <td><button class="btn btn-danger" (click)="saveAttendanceCal(att.key, att.value.attendanceCal)">save attendanceCal</button></td>
-              <td><button class="btn btn-danger" (click)="deleteAttendance(att.key)">Delete</button></td>
-            </tr>
-          </tbody>
-        </table>
+              <button class="btn btn-danger" (click)="saveAttendanceCal(att.key)">save attendanceCal</button>
+              <button class="btn btn-danger" (click)="deleteAttendance(att.key)">Delete</button>
+              </div>
       </div>
     </div>
   </div>

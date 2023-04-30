@@ -61,16 +61,12 @@ export class AttendanceComponent implements OnInit {
     // this.attendanceService.updateAttendance(id, updatedCalValue);
   }
 
-  saveAttendanceCal(key:string,cal:any) {
+  saveAttendanceCal(key:string) {
     this.attendanceService.saveAttendanceCal(key, this.attendance);
   }
 
   onSubmit() {
-    if (this.attendanceForm?.invalid) {
-      return;
-    }
-
-    const newAttendance = {
+        const newAttendance = {
       name: this.attendanceForm?.controls?.['name'].value,
       // present: this.attendanceForm?.controls['present'].value,
       // absent: this.attendanceForm?.controls['absent'].value
