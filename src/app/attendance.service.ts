@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
+import { Observable, from } from 'rxjs';
 import { getDatabase, onValue, push, ref, remove, set, update } from 'firebase/database';
 
-import { Observable } from 'rxjs';
 import { initializeApp } from 'firebase/app';
 
 @Injectable({
@@ -46,10 +46,10 @@ export class AttendanceService {
     return set(attendanceRef, value);
   }
 
-  saveAttendanceCal(id: string, attendanceCal: any): Promise<void> {
+  saveAttendanceCal(id: string, attendanceCal: any) {
     const attendanceRef = ref(this.database, `attendance/${id}`);
-    const attn = attendanceCal[id].attendanceCal
-    return update(attendanceRef, { attendanceCal: attn });
+    const attn = attendanceCal[id]?.attendanceCal;
+    return from(update(attendanceRef, { attendanceCal: attn }));
   }
   
 
@@ -58,9 +58,3 @@ export class AttendanceService {
     return remove(attendanceRef);
   }
 }
-
-
-
-
-
-

@@ -3,3 +3,19 @@
     height: 300px;
     overflow: auto;
   }
+
+  .form-group {
+    margin: 3rem auto;
+    width: 400px;
+    border-bottom: 1px;
+  }
+
+  .item-container {
+    max-width: 75%;
+    margin: auto;
+  }
+
+ ngx-multiple-dates {
+    height: 20rem !important;
+    overflow-y: scroll !important;
+  }

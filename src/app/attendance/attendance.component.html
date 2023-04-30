@@ -1,15 +1,16 @@
 <div class="container mt-4">
     <div class="row">
       <div class="col-md-8">
+        <h1>Attendance App</h1>
         <form [formGroup]="attendanceForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label for="name"></label>
-            <input type="text" placeholder="Enter Name and click enter" class="form-control" id="name" formControlName="name" style="width:300px">
+            <mat-label for="name"></mat-label>
+            <input matInput type="text" placeholder="Enter new name here and click enter" class="form-control" id="name" formControlName="name">
           </div>
         </form>
       </div>
     </div>
-    <div class="row mt-4">
+    <div class="item-container">
       <div class="col-md-8" style="overflow: auto;">
             <div *ngFor="let att of attendance | keyvalue" style="width:200px;float: left;">
                     
@@ -29,20 +30,25 @@
                     </mat-card-content>
                 </mat-card> -->
                 <mat-card>
-                    <!-- <mat-card-header>
+                    <mat-card-header style="text-align: center;display: block;">
                       <mat-card-title>{{ att.value.name }} </mat-card-title>
-                    </mat-card-header> -->
+                    </mat-card-header>
                     <mat-card-content>
-                        <mat-form-field class="full-width">
-                          <ngx-multiple-dates [matDatepicker]="pickerCalendar" [placeholder]="att.value.name" [name]="att.value.name" [(ngModel)]="att.value.attendanceCal">
+                        <mat-form-field class="full-width" style="text-align: center;">
+                          <mat-datepicker #pickerCalendar (dateChange)="onDateChange(att.key, $event)"></mat-datepicker>
+                          <ngx-multiple-dates [matDatepicker]="pickerCalendar" placeholder="Click, enter dates, click save" [name]="att.value.name" [(ngModel)]="att.value.attendanceCal">
                           </ngx-multiple-dates>
-                          <mat-datepicker #pickerCalendar (dateChange)="saveAttendanceCal(att.key)"></mat-datepicker>
+                          <!-- <mat-datepicker #pickerCalendar (dateChange)="saveAttendanceCal(att.key)"></mat-datepicker> -->
                         </mat-form-field>
                       </mat-card-content>
                   </mat-card>
                 
-              <button class="btn btn-danger" (click)="saveAttendanceCal(att.key)">save attendanceCal</button>
-              <button class="btn btn-danger" (click)="deleteAttendance(att.key)">Delete</button>
+              <button mat-mini-fab color="primary" aria-label="save icon" (click)="saveAttendanceCal(att.key)">
+                <mat-icon>save</mat-icon>
+              </button>
+              <button mat-mini-fab color="warn" aria-label="save icon" (click)="deleteAttendance(att.key)">
+                <mat-icon>delete</mat-icon>
+              </button>
               </div>
       </div>
     </div>

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { map, tap } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 import { AttendanceService } from '../attendance.service';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-attendance',
@@ -52,6 +53,11 @@ export class AttendanceComponent implements OnInit {
       this.attendance = data;
     });
   }
+  
+  onDateChange(id: string, event: any) {
+    const attendanceCal = { attendanceCal: event.value };
+    this.attendanceService.saveAttendanceCal(id, attendanceCal).subscribe();
+  }
 
   updateAttendance(id: string, value: any, name: string) {
     const updatedCalValue = {
@@ -63,6 +69,15 @@ export class AttendanceComponent implements OnInit {
 
   saveAttendanceCal(key:string) {
     this.attendanceService.saveAttendanceCal(key, this.attendance);
+  }
+
+  onAttnChange(key: string) {
+    console.count('onAttnChange');
+    this.attendanceService?.saveAttendanceCal(key, this.attendance)
+      .pipe(debounceTime(500))
+      .subscribe(() => {
+        console.log('Attendance data saved!');
+      });
   }
 
   onSubmit() {
